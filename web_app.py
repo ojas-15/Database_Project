@@ -17,6 +17,10 @@ app.config['MYSQL_DB'] = 'dispensary'
 # Intialize MySQL
 mysql = MySQL(app)
 
+@app.route('/about_us')
+def about():
+    return render_template('about_us.html')
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -126,6 +130,7 @@ def edit():
 
     table = nested_list_to_html_table(select_with_headers(mysql, table_name), buttons=True)
     return render_template('edit.html', table=table, table_name=table_name, operation=operation, form_html=form_html)
+
 
 if __name__ == '__main__':
     app.run()
