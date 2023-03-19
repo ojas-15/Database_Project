@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" data-theme="emerald">
+  <head style="height: 100%; width: 100%;">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.12.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}"> -->
+    <!-- npm i bootstrap-icons -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <style>
+       body{
+        /* background-color: #C9EEFF; */
+      }
+    </style>
+
+    <title>Hospital Database System</title>
+  </head>
+  <body style="height: 100%; width: 100%; overflow-x: hidden; font-family: 'Merriweather', serif;">
+    <!-- navbar -->
+    <div class="navbar mb-2 fixed w-full z-50 top-0 border-b bg-base-100 text-base-content ">
+      <!-- <div class="px-2 mx-2 navbar-start ">
+          <span class="text-lg font-bold">
+            <a href="/">Hospital Database System</a>
+          </span>
+      </div>  -->
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="static/logo1.jpeg.jpg" alt="Bootstrap" width="175" height="50">
+        </a>
+      </div>
+      <div class="hidden px-2 mx-2 navbar-center lg:flex">
+        <div class="flex items-stretch">
+          <ul class="menu menu-horizontal">
+            <li>
+              <a href="/" class="ghost-btn rounded-lg">Home</a>
+              <a href="pick_table" class="ghost-btn rounded-lg">Edit</a>
+              <!-- <a href="pick_table" class="ghost-btn rounded-lg">About Us</a> -->
+              <!-- <a href="about_us.html#about">About Us</a> -->
+              <a href="templates\about_us.html">About Us</a>
+            </li> 
+          </ul>
+        </div>
+      </div> 
+      <div class="navbar-end">
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" class="m-1 btn btn-square btn-ghost lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </div> 
+          <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
+            <li>
+              <a href="/" >Home</a>
+              <a href="pick_table" >Edit</a>
+            </li> 
+            
+          </ul>
+        </div> 
+        <!-- <button class="btn btn-square btn-ghost">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">             
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>             
+          </svg>
+        </button> -->
+      </div>
+  </div>
+
+
+  <!-- hero -->
+  <div class="hero min-h-screen bg-base-100" style="background-image: url(static/bggg1.jpg);">
+    <div class="hero-content flex-col lg:flex-row gap-8">
+      <!-- <div class="flex-col w-4/5">
+        <img src="{{url_for('static', filename='hero_img.svg')}}" class="w-full" />
+      </div> -->
+      <div class="container-fluid" style="text-align: left;">
+        <h1 class="text-5xl font-bold cont" style="font-weight: 2000;">Dispensary Management System</h1>
+        <p class="py-6" style="color: #191825; font-weight: 750; font-size: medium;">
+          Welcome to our dispensary management system website! We provide an all-in-one solution for dispensary 
+          owners to manage their inventory, sales, and customer information. Our user-friendly platform is designed to
+           streamline operations and increase efficiency, while also ensuring compliance with industry regulations. 
+           With our system, you can focus on what matters most: providing high-quality products and exceptional customer service.
+         </p>
+        
+        <form method="post" enctype="multipart/form-data" >
+          <button name="start" value="start" class="btn btn-secondary">Get Started</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- footer -->   
+  {% include 'footer.html' %}
+
+  </body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
+  
+  <title>Responsive HTML Page</title>
+  <style>
+    /* Styles for the page */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Merriweather', serif;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ccc;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px 0;
+    }
+
+    .container-1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .left,
+    .center,
+    .right {
+      flex: 1;
+      text-align: center;
+    }
+
+    .left {
+      text-align: left;
+    }
+
+    .right {
+      text-align: right;
+    }
+
+    .right a {
+      color: #fff;
+      margin-left: 10px;
+    }
+
+    .right a:first-child {
+      margin-left: 0;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div class="container" id="about">
+    <h1>About</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur odio pariatur natus id eius, dignissimos
+      corrupti enim fugiat dolor laudantium sed! Illum quo sint iusto vero nam rem eaque perspiciatis totam ut earum
+      quasi, cupiditate maxime libero quaerat ducimus, repellendus exercitationem dicta placeat, possimus velit id qui
+      quos culpa! Ipsam?
+    </p>
+    <h2>Team</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>G1</th>
+          <th>G2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Amaan Ansari</td>
+          <td>Akshat Shrivastava</td>
+        </tr>
+        <tr>
+          <td>Govardhan Ingale</td>
+          <td>Dhakad Bhagat Singh</td>
+        </tr>
+        <tr>
+          <td>Aishwarya Omar</td>
+          <td>Mahesh Dange</td>
+        </tr>
+        <tr>
+          <td>Ronak Hingonia</td>
+          <td>Yash Kokane</td>
+        </tr>
+        <tr>
+          <td>Ojas Washimkar</td>
+          <td>Shubham Kumar</td>
+        </tr>
+        <tr>
+          <td>----------</td>
+          <td>Yash Adhiya</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2>Another Heading</h2>
+    <p>This is a paragraph for the second heading.</p>
+  </div>
+
+  <div class="container-fluid" style="font-size: small;">
+    <footer class="py-3 my-4">
+      <p class="text-center text-muted">&copy; The Database Dynamos IIT GN</p>
+      <br>
+      <p class="text-center text-muted">CS 432: Databases Project</p>
+    </footer>
+  </div>
+  
+</body>
+
+</html>
