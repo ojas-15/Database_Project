@@ -1,7 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
-from sql_helper import *
-from html_helper import *
+from sql_tools import *
+from html_tools import *
+
+from flask import Flask, render_template, request, redirect, url_for, session
+from flask_mysqldb import MySQL
+import flask
+import yaml
+import MySQLdb.cursors
+import re
 
 app = Flask(__name__)
 app.debug = True
@@ -16,16 +23,101 @@ app.config['MYSQL_DB'] = 'dispensary'
 
 # Intialize MySQL
 mysql = MySQL(app)
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    msg = ''
+    if request.method == 'POST' and 'useremail' in request.form and 'password' in request.form and 'authority' in request.form:
+        useremail = request.form['useremail']
+        password = request.form['password']
+        authority = request.form['authority']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        if (authority == "patient"): 
+            cursor.execute('SELECT * FROM users WHERE email = % s AND password = % s AND role=%s', (useremail, password,"patient",))
+            account = cursor.fetchone()
+            if account:
+                session['bool'] = True
+                session['email'] = account['email'] # here, match emails
+                msg = 'Logged in successfully!'
+                flask.flash(msg)
+                return redirect(url_for('index'))
+                # return redirect(url_for("patientdashboard")) # redirect to customer dashboard
+            else:
+                msg = 'Incorrect username / password !'
+        elif (authority == "doctor"):
+            cursor.execute('SELECT * FROM users WHERE email = % s AND password = % s AND role=%s', (useremail, password, "doctor",))
+            account = cursor.fetchone()
+            if account:
+                session['bool'] = True
+                session['email'] = account['email']
+                msg = 'Logged in successfully!'
+                flask.flash(msg)
+                return redirect(url_for('index'))
+                # return redirect(url_for("doctordashboard")) # redirect to doctor dashboard
+            else:
+                msg = 'Incorrect username/password!'
+                flask.flash(msg)
+        elif (authority == "admin"):
+            cursor.execute('SELECT * FROM users WHERE email = % s AND password = % s AND role=%s', (useremail, password, "admin", ))
+            account = cursor.fetchone()
+            if account:
+                session['bool'] = True
+                session['email'] = account['email']
+                msg = 'Logged in successfully!'
+                flask.flash(msg)
+                return redirect(url_for('index'))
+                #return redirect(url_for("admindashboard")) # redirect to admin dashboard
+            else:
+                msg = 'Incorrect username/password!'
+                flask.flash(msg)
+        else:
+            msg = 'Incorrect username/password!'
+            flask.flash(msg)
+    return render_template('login.html', msg = msg)
+
+# about us url
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
+
+@app.route('/register', methods =['GET', 'POST'])
+def register():
+    msg = ''
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form and 'role' in request.form :
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        role = request.form['role']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM users WHERE email = % s', (username, ))
+        account = cursor.fetchone() # fetches the first row
+        if account:
+            msg = 'Account already exists !'
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            msg = 'Invalid email address !'
+        elif not re.match(r'[A-Za-z0-9]+', username):
+            msg = 'Username must contain only characters and numbers !'
+        elif not username or not password or not email:
+            msg = 'Please fill out the form !'
+        else:
+            cursor.execute('INSERT INTO users VALUES (NULL, %s, % s, % s, % s)', (username, email, password, role))
+            mysql.connection.commit()
+            msg = 'You have successfully registered!'
+    elif request.method == 'POST':
+        msg = 'Please fill out the form!'
+    return render_template('register.html', msg = msg)
 
 @app.route('/about_us')
 def about():
     return render_template('about_us.html')
 
-@app.route('/')
+
+@app.route('/index')
 def index():
     return render_template('index.html')
 
-@app.route('/', methods=['POST'])
+@app.route('/index', methods=['POST'])
 def choose():
     if request.form.get("start"):
         return redirect(url_for('pick_table'))

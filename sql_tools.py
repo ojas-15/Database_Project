@@ -185,3 +185,4 @@ def update_table(mysql, tablename, set_statement,  where_condition):
     cursor.fetchall()
     res2 = select_with_headers(mysql, tablename) # after the operation
     return res1, res2
+
