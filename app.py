@@ -139,10 +139,7 @@ def pick_table():
         session.pop('table_name', None)
     options = nested_list_to_html_select(show_tables(mysql))
     if request.method == 'POST' and 'table' in request.form:
-        # if 'describe' in request.form:
-        #     table_name = request.form['table']
-        #     table = nested_list_to_html_table(desc_table(mysql, table_name))
-        #     return render_template('pick_table.html', table=table, table_name=table_name, options=options)
+    
         if 'pick' in request.form:
             session['table_name'] = request.form['table']
             return redirect(url_for('edit'))

@@ -1,12 +1,15 @@
 def nested_list_to_html_table(table:list, buttons:bool = False):
+    
     '''
-    Helper function to convert a list of lists into an html table
-    table: list of lists to be converted into an html table
-    button: boolean variable denoting whether there are buttons
+    code is a function that takes in a list of lists and returns an html table.
+    The first argument is the name of the function, which is "table".
+    The second argument is the list to be converted into an html table.
+    The third argument is a boolean variable denoting whether there are buttons on the page.
+    If it's true, then there will be buttons on this page; if false, then there won't be any buttons on this page.
+    The fourth argument is what we're going to return as our output: html_string: The corresponding table in html format as a string
+    code will return the html string as a table.
+    '''
 
-    Return
-    html_string: The corresponding table in html format as a string
-    '''
     columns = table[0]
     html_string = '<thead><tr><th></th>'
 
@@ -43,11 +46,11 @@ def nested_list_to_html_table(table:list, buttons:bool = False):
 
 def nested_list_to_html_select(nested_list:list):
     '''
-    Helper function to convert a list of lists into an html select tag
-    nested_list: list of lists to be converted into an html select tag
-
-    Return
-    select_string: The corresponding select tag in html format as a string
+    code is converting a list of lists into an html select tag.
+    The nested_list is the list to be converted and the return value is the corresponding
+    select tag in html format as a string.
+    code will return the string "select_string" which
+    is the corresponding select tag in html format.
     '''
     select_string = "<option disabled selected>Choose table</option>" 
     
@@ -59,11 +62,10 @@ def nested_list_to_html_select(nested_list:list):
 
 def get_insert_form(columns:list):
     '''
-    Create an insert form string out of column names
-    columns: list containing the column names
-
-    Return
+    code is creating a string out of the column names.
+    code is then inserting each row into the string.
     form_string: String containing the insert form
+    code creates a string containing the insert form.
     '''
     form_string = ""
 
@@ -74,11 +76,10 @@ def get_insert_form(columns:list):
 
 def get_update_form(columns:list, values:list):
     '''
-    Create an update form string out of column names
-    columns: list containing the column names
+    code starts by creating a list of column names.
+    next line creates the string "form_string" which is then used to create an update form.
+    code creates a string containing the update form.
 
-    Return
-    form_string: String containing the update form
     '''
     form_string = ""
 

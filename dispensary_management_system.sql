@@ -23,11 +23,11 @@ USE DMS;
     -- state VARCHAR(50),
     -- Pincode VARCHAR(50));
 
-ALTER TABLE Vendor_contacts ADD COLUMN location JSON;
+-- ALTER TABLE Vendor_contacts ADD COLUMN location JSON;
 
-UPDATE Vendor_contacts SET location = JSON_OBJECT(
-    'Country Code', contact_country_code
-);
+-- UPDATE Vendor_contacts SET location = JSON_OBJECT(
+--     'Country Code', contact_country_code
+-- );
 
 -- Employee
 DROP TABLE IF EXISTS Employee;
