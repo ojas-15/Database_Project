@@ -18,7 +18,7 @@ In summary, this project required the team to develop a web application using Fl
 
 ## Installation
 
-Installation requirements:
+Installation requirements to run this project:
 
 ```bash
   python3 -m venv env_flask
@@ -67,6 +67,7 @@ Note: MySQL Server(workbench) should be installed on the PC. Dump the “dispens
 - Activate environment using command “./venv/Scripts\activate.ps1”
 - Install required libraries (mentioned above)
 - Run the “app.py” file using command “python ./app.py”
+- Click on the URL 
 
 
 
@@ -397,7 +398,15 @@ Since the delete operation is performed in the Prescription Relation, which cons
   Backend Development, Frontend debugging, Report compilation.
 
 
+## Refrences
 
+Here are some refrences used - 
+
+[Flask Tutorial](https://www.javatpoint.com/flask-tutorial)
+
+[Database Connection](https://pynative.com/python-mysql-database-connection/)
+
+[Youtube Tutorial](https://www.youtube.com/watch?v=yBDHkveJUf4&t=1132s&ab_channel=freeCodeCamp.org)
 
 
 
