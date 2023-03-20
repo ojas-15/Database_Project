@@ -9,7 +9,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <style>
+      .ghost-btn {
+        color: black;
+        background-color: transparent;
+        border-radius: 0.25rem;
+        padding: 0.5rem 1rem;
+        transition: all 0.2s ease-in-out;
+      }
 
+      .ghost-btn:hover {
+        color: white;
+        background-color: #377cfb;
+        border-color: #377cfb;
+      }
+
+
+    </style>
     <title>Dispensary Management System</title>
 
   </head>
@@ -28,7 +44,7 @@
             <li>
               <a href="/index" class="ghost-btn rounded-lg">Home</a>
               <a href="pick_table" class="ghost-btn rounded-lg">Edit</a>
-              <a href="/about_us">About Us</a>
+              <a href="/about_us" class="ghost-btn rounded-lg">About Us</a>
 
             </li> 
           </ul>
