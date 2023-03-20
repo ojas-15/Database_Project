@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en" data-theme="emerald">
   <head style="height: 100%; width: 100%;">
-    <!-- Required meta tags -->
+
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -12,8 +13,10 @@
 
     <title>Hospital Database System</title>
   </head>
+
   <body style="height: 100%; width: 100%; overflow-x: hidden; font-family: 'Merriweather', serif;">
-    <!-- navbar -->
+    
+
     <div class="navbar mb-2 fixed w-full z-50 top-0 border-b bg-base-100 text-base-content ">
       
       <div class="container">
@@ -44,16 +47,14 @@
             <li>
               <a href="/" >Home</a>
               <a href="pick_table" >Edit</a>
-            </li> 
-            
+            </li>  
           </ul>
-        </div>
-       
+        </div>       
       </div>
   </div>
 
 
-  <!-- hero -->
+  
   <div class="min-h-screen bg-base-100 p-16 lg:p-32" style="background-image: url(static/bg2.jpg);">
     <div class="flex-col">
       <div class="form-control">
@@ -72,9 +73,7 @@
               <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
             </svg>
             Insert
-          </button>
-          
-          
+          </button> 
         </form>
         </div>
       </div>
@@ -92,7 +91,8 @@
       </div>
 
     </div>
-    <!-- card overflow-x-auto w-full overflow-y-auto max-h-96 shadow-xl -->
+
+    
       {% if operation=='insert' %}
       <form class='card-body flex flex-col gap-4 bg-base-200 rounded-lg mx-4 shadow-xl' enctype='multipart/form-data' method='post'>
         <h1 class="font-bold text-xl p-2">Insertion</h1>
@@ -122,8 +122,7 @@
   </div>
 
   <!-- footer -->
-
   {% include 'footer.html' %}
-
   </body>
+  
 </html>
