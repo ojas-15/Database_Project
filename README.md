@@ -363,7 +363,7 @@ Since the delete operation is performed in the Prescription Relation, which cons
 
 ## Work Distribution
 
-- Aishwarya Omar: 
+- ### Aishwarya Omar: 
 User authentification frontend, connected authentication frontend with backend, integrated webapp, report documentation
 
 
