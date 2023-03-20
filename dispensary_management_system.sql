@@ -427,6 +427,21 @@ CREATE INDEX prescription_idx ON prescription(prescription_id);
 CREATE INDEX insurance_idx ON insurance(insurance_provider);
 CREATE INDEX medical_inv_idx ON medical_inventory(medical_id);
 
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL
+);
+
+INSERT INTO users (name, email, password, role) VALUES
+    ('Rakesh Kumar', 'rakesh.kumar@gmail.com', '123456', 'patient'),
+    ('Sunita Gupta', 'sunita.gupta@gmail.com', '123456', 'patient'),
+    ('Anupama Singh', 'anupama.singh@gmail.com', '123456', 'doctor'),
+    ('Rohan Mehra', 'rohan.mehta@gmail.com', '123456', 'doctor'),
+    ('Yash Kokane', 'yash.kokane@gmail.com', '123456', 'admin');
 
 -- table extension
 DROP TABLE IF EXISTS Pharma_Vendors;

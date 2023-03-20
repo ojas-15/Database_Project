@@ -2,6 +2,9 @@ DROP DATABASE IF EXISTS dispensary;
 CREATE DATABASE dispensary;
 USE dispensary;
 
+-- this database is seperately created for the login register page, it is then use in
+-- dispensary_management_system which was further use in the app.py to connect the database
+
 DROP TABLE IF EXISTS Patients;
 CREATE TABLE Patients (
     ID INT PRIMARY KEY,
