@@ -68,5 +68,7 @@ Note: MySQL Server(workbench) should be installed on the PC. Dump the “dispens
 
 
 #### Now after running the server you will get a login page:
+![image](https://user-images.githubusercontent.com/105475941/226404419-984a5c0a-ee78-4b7d-950d-77a21bd77187.png)
+
 
 
