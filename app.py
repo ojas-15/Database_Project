@@ -3,8 +3,6 @@ from flask_mysqldb import MySQL
 from sql_tools import *
 from html_tools import *
 
-from flask import Flask, render_template, request, redirect, url_for, session
-from flask_mysqldb import MySQL
 import flask
 import yaml
 import MySQLdb.cursors
@@ -13,16 +11,19 @@ import re
 app = Flask(__name__)
 app.debug = True
 
-app.secret_key = 'mango'
+app.secret_key = 'your_secret_key'
 
-# Enter your database connection details below
+# Enter your mysql connection details here
 app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'justanother_msd'
-app.config['MYSQL_DB'] = 'dispensary'
+app.config['MYSQL_DB'] = 'dms'
 
 # Intialize MySQL
+
 mysql = MySQL(app)
+
+# first
 @app.route('/', methods=['GET', 'POST'])
 def login():
     msg = ''
@@ -76,6 +77,8 @@ def login():
 
 # about us url
 
+# second
+
 @app.route('/logout')
 def logout():
     session.clear()
@@ -108,21 +111,26 @@ def register():
         msg = 'Please fill out the form!'
     return render_template('register.html', msg = msg)
 
+# third
+
 @app.route('/about_us')
 def about():
     return render_template('about_us.html')
 
-
+# fourth
 @app.route('/index')
 def index():
     return render_template('index.html')
 
+# fifth
 @app.route('/index', methods=['POST'])
 def choose():
     if request.form.get("start"):
         return redirect(url_for('pick_table'))
     else:
         return render_template('index.html')
+
+# sixth
 
 @app.route('/pick_table', methods=['POST', 'GET'])
 def pick_table():
@@ -142,6 +150,7 @@ def pick_table():
     table = nested_list_to_html_table(show_tables(mysql))
     return render_template('pick_table.html', table=table, table_name=table_name, options=options)
 
+# seventh
 
 @app.route('/edit', methods=['POST', 'GET'])
 def edit():
@@ -223,6 +232,7 @@ def edit():
     table = nested_list_to_html_table(select_with_headers(mysql, table_name), buttons=True)
     return render_template('edit.html', table=table, table_name=table_name, operation=operation, form_html=form_html)
 
+# app run 
 
 if __name__ == '__main__':
     app.run()

@@ -2,14 +2,17 @@
 <html lang="en" data-theme="emerald">
 
 <head style="height: 100%; width: 100%;">
-  <!-- Required meta tags -->
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+   
+  <!-- Bootstrap link  -->
   <link href="https://cdn.jsdelivr.net/npm/daisyui@2.12.0/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+   
+  <!-- font awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
+
   <style>
     .ghost-btn {
       color: black;
@@ -24,8 +27,6 @@
       background-color: #377cfb;
       border-color: #377cfb;
     }
-
-
   </style>
 
   <title>Dispensary Management System</title>
@@ -33,6 +34,7 @@
 </head>
 
 <body style="height: 100%; width: 100%; overflow-x: hidden; font-family: 'Merriweather', serif;">
+
   <!-- navbar -->
   <div class="navbar mb-2 fixed w-full z-50  top-0 border-b bg-base-100 text-base-content ">
     <div class="container">
@@ -40,6 +42,7 @@
         <img src="static/logo1.jpeg.jpg" alt="Bootstrap" width="175" height="50">
       </a>
     </div>
+
     <div class="hidden px-2 mx-2 navbar-center lg:flex">
       <div class="flex items-stretch">
         <ul class="menu menu-horizontal">
@@ -47,11 +50,11 @@
             <a href="index" class="ghost-btn rounded-lg">Home</a>
             <a href="pick_table" class="ghost-btn rounded-lg">Edit</a>
             <a href="http://127.0.0.1:5000/templates/about_us.html" class="ghost-btn rounded-lg">About Us</a>
-
           </li>
         </ul>
       </div>
     </div>
+
     <div class="navbar-end">
       <div class="dropdown dropdown-end">
         <div tabindex="0" class="m-1 btn btn-square btn-ghost lg:hidden">
@@ -65,15 +68,11 @@
             <a href="/">Home</a>
             <a href="pick_table">Edit</a>
           </li>
-
         </ul>
       </div>
-    
     </div>
   </div>
 
-
-  
   <div class="min-h-screen bg-base-100 p-16 lg:p-32">
     <div class="flex-col">
       <div class="form-control">

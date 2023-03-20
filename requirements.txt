@@ -1,0 +1,10 @@
+flask
+flask-mysqldb
+pyyaml
+MySQLdb.cursors
+re
+render_template
+request
+redirect
+url_for 
+session
