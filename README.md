@@ -123,36 +123,36 @@ From here you can explore options. Clicking on “IIT-GN Dispensary logo” will
 The web application shows the view of the different relations with the Insert, Update, and Delete operations on these relations. Screenshots include the view of the relation with the following operations and the results with the changes in the MySQL database itself. We also include the results which give an error due to some constraints defined by us while making the database, such as primary-key error etc.
 
 ## Prescription Table
-- View of Prescription Relation
+- **View of Prescription Relation**
 
 ![prescription_web_table](https://user-images.githubusercontent.com/105475941/226407332-f955a9a1-29dd-49f4-afb9-876fb9f1934e.png)
 
-- View of Prescription Relation in Workbench
+- **View of Prescription Relation in Workbench**
 
 ![prescription_on_mysql](https://user-images.githubusercontent.com/105475941/226407615-a4dffa08-a9ac-4382-8dd2-5d7aaf72e44d.png)
 
-- Inserting Entries in Prescription Relation
+- **Inserting Entries in Prescription Relation**
 
 ![insert_on_prescription](https://user-images.githubusercontent.com/105475941/226407711-255bf054-6fd0-4c99-8b30-cade07b3b04c.png)
 
-- Inserting Entries Result on MySql
+- **Inserting Entries Result on MySql**
 
 ![insert_result_on_prescription](https://user-images.githubusercontent.com/105475941/226407763-8ab06f17-82d8-40bd-8426-94e555bd85ca.png)
 
-- Updating Entries in Prescription Relation
+- **Updating Entries in Prescription Relation**
 
 ![update_on_prescription](https://user-images.githubusercontent.com/105475941/226408095-10c71542-187b-49e9-977b-f017da14d838.png)
 
-- Updating Entries Result on Mysql
+- **Updating Entries Result on Mysql**
 
 ![update_result_on_prescription](https://user-images.githubusercontent.com/105475941/226408137-3823c517-e7b3-49ec-bbd4-ed3de72b0e22.png)
 
 
-- Deleting Entries in Prescription Relation
+- **Deleting Entries in Prescription Relation**
 
 ![delete_on_prescription](https://user-images.githubusercontent.com/105475941/226408279-89b9d7f3-1587-4ba4-ade4-1291ee0252af.png)
 
-- Deleting Entries Result on Mysql
+- **Deleting Entries Result on Mysql**
 
 ![delete_result_on_prescription](https://user-images.githubusercontent.com/105475941/226408312-1c8310c4-2c2e-4611-91f7-e93bfc1558b9.png)
 
@@ -161,74 +161,74 @@ Since the delete operation is performed in the Prescription Relation, which cons
 
 ## Patient Tabe
 
-- View of Patient Relation
+- **View of Patient Relation**
 
 ![patient_web_table](https://user-images.githubusercontent.com/105475941/226408921-4c4623cf-3ccf-4a40-b5d8-58ecf43648a0.png)
 
-- View of Patient Relation in Workbench
+- **View of Patient Relation in Workbench**
 
 ![patient_mysql_table](https://user-images.githubusercontent.com/105475941/226409002-45284c98-400d-428f-83b4-6cc4c0145dbe.png)
 
-- Inserting Entries in Patient Relation
+- **Inserting Entries in Patient Relation**
 
 ![insert_on_patient](https://user-images.githubusercontent.com/105475941/226409042-b3f57f9d-4e85-4e7f-9846-9d18e6b5a08b.png)
 
-- Inserting Entries Result on Mysql
+- **Inserting Entries Result on Mysql**
 ![insert_result_on_patient](https://user-images.githubusercontent.com/105475941/226409094-2fb57657-e441-4d01-98e4-6513db0ddcbe.png)
 
-- Updating Entries in Patient Relation
+- **Updating Entries in Patient Relation**
 
 ![update_on_patient](https://user-images.githubusercontent.com/105475941/226409295-795b52ef-bd02-4e56-b6c0-cf00f9fceb30.png)
 
-- Updating Entries Result on Mysql
+- **Updating Entries Result on Mysql**
 
 ![update_result_on_patient](https://user-images.githubusercontent.com/105475941/226409318-83d9e439-8a6f-46e0-88e2-fbbff5a21cfe.png)
 
-- Deleting Entries in Patient Relation
+- **Deleting Entries in Patient Relation**
 
 ![delete_on_patient](https://user-images.githubusercontent.com/105475941/226409466-828973c6-79ca-4f4b-93fc-61ca3682a13c.png)
 
-- Deleting Entries Result on Mysql
+- **Deleting Entries Result on Mysql**
 
 ![delete_result_on_patient](https://user-images.githubusercontent.com/105475941/226409498-1799cc8d-f55d-4fce-975e-5e3d2d44bef1.png)
 
 ## General Visit Table
 
-- View of General Visit Relation
+- **View of General Visit Relation**
 
 ![generalvisit_web_table](https://user-images.githubusercontent.com/105475941/226410153-c52ee1ba-a801-4636-9097-d37d53205d07.png)
 
-- View of General Visit Relation in Workbench
+- **View of General Visit Relation in Workbench**
 
 ![generalvisit_mysql_table](https://user-images.githubusercontent.com/105475941/226410203-0f5fd5de-5421-419e-ae87-c91433cfd783.png)
 
-- Inserting General Visit in Prescription Relation
+- **Inserting General Visit in Prescription Relation**
 
 ![insert_on_generalvisit](https://user-images.githubusercontent.com/105475941/226410257-ac89e532-85f8-45eb-9c4d-c8c4d191f742.png)
 
-- Inserting General Visit Result on Mysql  
+- **Inserting General Visit Result on Mysql**  
 
 ![insert_result_on_generalvisit](https://user-images.githubusercontent.com/105475941/226410303-46edd641-6d28-4245-954b-9f2f92b0c371.png)
 
-- Updating Entries in General Visit Relation
+- **Updating Entries in General Visit Relation**
 
 ![update_on_generalvisit](https://user-images.githubusercontent.com/105475941/226410361-d710418f-9bb1-46d4-b514-ab4a4a3f03de.png)
 
-- Updating Entries in General Visit Result on Mysql 
+- **Updating Entries in General Visit Result on Mysql** 
 
 ![update_result_on_generalvisit](https://user-images.githubusercontent.com/105475941/226410413-df1108dc-80e3-4bb1-bb42-c50771437e6b.png)
 
-- Deleting Entries in General Visit Relation
+- **Deleting Entries in General Visit Relation**
 
 ![delete_on_generalvisit](https://user-images.githubusercontent.com/105475941/226410458-c0c2ecf7-8625-444c-b6f2-7ad935c3a302.png)
 
-- Deleting Entries in General Visit Result on Mysql  
+- **Deleting Entries in General Visit Result on Mysql**  
 
 ![delete_result_on_generalvisit](https://user-images.githubusercontent.com/105475941/226410487-5a26c839-f42c-4846-a1fc-5081fd0eb713.png)
 
 ## Medicine Table
 
-- View of Medicine Relation
+- **View of Medicine Relation**
 
 ![medicine_web_table](https://user-images.githubusercontent.com/105475941/226411053-6120afbb-4295-41a8-b5a1-1af62482abc1.png)
 
@@ -361,6 +361,9 @@ Since the delete operation is performed in the Prescription Relation, which cons
 - Deleting Entries in Medical Products Result on Mysql
 
 ![delete_result_on_medicalproducts](https://user-images.githubusercontent.com/105475941/226414400-f13fe760-53f2-434c-a308-7fee4cf60626.png)
+
+### Here is the link for other tables snapshots
+- https://drive.google.com/drive/folders/1BWoMf2b5mdxWAuyzJag5LntfV9GY9Aqi?usp=share_link
 
 ## Note: 
 Because of a foreign key constraint error on insertion/deletion of a record, we faced a few issues with implementing deletion and insertion on some tables. We plan to resolve this issue in further iterations of the webpage.
