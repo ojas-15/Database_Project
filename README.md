@@ -361,10 +361,40 @@ Since the delete operation is performed in the Prescription Relation, which cons
 
 ![delete_result_on_medicalproducts](https://user-images.githubusercontent.com/105475941/226414400-f13fe760-53f2-434c-a308-7fee4cf60626.png)
 
-## Work Distribution
+#### Contribution of group Members
 
-- ### Aishwarya Omar: 
-User authentification frontend, connected authentication frontend with backend, integrated webapp, report documentation
+
+- **Aishwarya Omar (20110008)**:
+  User authentification frontend, Connected authentication frontend with backend, Integrated webapp, Report Documentation
+
+- **Akshat Shrivastava (20110009)**:
+  Frontend debugging, Backend Development, Report documentation.
+
+- **Amaan Ansari (20110011)**: 
+  Integrated frontend and developed the UI, Report compilation, Frontend Development.
+
+- **Mahesh Dange (20110050)**:
+  Frontend designing, Frontend Development, Backend Development, integrated frontend and backend,  Made Readme File, Report documentaion.
+
+- **Dhakad Bhagat Singh (20110055)**:
+   Backend debugging, Backend Development, Report compilation.
+
+- **Govardhan Ingale (20110070)**:
+  Connected database backend, Frontend Development, Report compilation.
+
+- **Ronak Hingonia (20110170)**:
+  Report compilation
+
+- **Ojas Washimkar (20110234)**:
+
+- **Yash Adhiya (20110235)**:
+  Backend Development,Frontend designing, Report documentation.
+
+- **Yash Kokane (20110237)**:
+   User authentification backend, Frontend designing, connected database backend for authtification, report compilation.
+
+- **Shubham Kumar (19110137)**:
+  Backend Development, Frontend debugging, Report compilation.
 
 
 
