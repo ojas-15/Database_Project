@@ -362,6 +362,9 @@ Since the delete operation is performed in the Prescription Relation, which cons
 
 ![delete_result_on_medicalproducts](https://user-images.githubusercontent.com/105475941/226414400-f13fe760-53f2-434c-a308-7fee4cf60626.png)
 
+## Note: 
+Because of a foreign key constraint error on insertion/deletion of a record, we faced a few issues with implementing deletion and insertion on some tables. We plan to resolve this issue in further iterations of the webpage.
+
 #### Contribution of group Members
 
 
