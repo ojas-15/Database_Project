@@ -36,7 +36,7 @@ def convert(raw_out, type):
 
     return res
 
-def col_names(mysql, tablename, db_name="dms"):
+def col_names(mysql, tablename, db_name="DMS"):
     '''
     Obtains the names of all columns of the table as a list
 
@@ -65,7 +65,7 @@ def list_to_string(list):
     corr_str = "(" + corr_str + ")"
     return corr_str
 
-def use_database(mysql, db_name='dms'):
+def use_database(mysql, db_name='DMS'):
     '''
     Selects database
 

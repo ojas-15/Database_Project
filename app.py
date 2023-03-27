@@ -16,12 +16,13 @@ app.secret_key = 'your_secret_key'
 # Enter your mysql connection details here
 app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'justanother_msd'
-app.config['MYSQL_DB'] = 'dms'
+app.config['MYSQL_PASSWORD'] = 'dbpassword'
+app.config['MYSQL_DB'] = 'DMS'
 
 # Intialize MySQL
 
 mysql = MySQL(app)
+
 
 # first
 @app.route('/', methods=['GET', 'POST'])
@@ -32,12 +33,13 @@ def login():
         password = request.form['password']
         authority = request.form['authority']
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        if (authority == "patient"): 
-            cursor.execute('SELECT * FROM users WHERE email = % s AND password = % s AND role=%s', (useremail, password,"patient",))
+        if (authority == "patient"):
+            cursor.execute('SELECT * FROM users WHERE email = % s AND password = % s AND role=%s',
+                           (useremail, password, "patient",))
             account = cursor.fetchone()
             if account:
                 session['bool'] = True
-                session['email'] = account['email'] # here, match emails
+                session['email'] = account['email']  # here, match emails
                 msg = 'Logged in successfully!'
                 flask.flash(msg)
                 return redirect(url_for('index'))
@@ -45,7 +47,8 @@ def login():
             else:
                 msg = 'Incorrect username / password !'
         elif (authority == "doctor"):
-            cursor.execute('SELECT * FROM users WHERE email = % s AND password = % s AND role=%s', (useremail, password, "doctor",))
+            cursor.execute('SELECT * FROM users WHERE email = % s AND password = % s AND role=%s',
+                           (useremail, password, "doctor",))
             account = cursor.fetchone()
             if account:
                 session['bool'] = True
@@ -58,7 +61,8 @@ def login():
                 msg = 'Incorrect username/password!'
                 flask.flash(msg)
         elif (authority == "admin"):
-            cursor.execute('SELECT * FROM users WHERE email = % s AND password = % s AND role=%s', (useremail, password, "admin", ))
+            cursor.execute('SELECT * FROM users WHERE email = % s AND password = % s AND role=%s',
+                           (useremail, password, "admin",))
             account = cursor.fetchone()
             if account:
                 session['bool'] = True
@@ -66,14 +70,15 @@ def login():
                 msg = 'Logged in successfully!'
                 flask.flash(msg)
                 return redirect(url_for('index'))
-                #return redirect(url_for("admindashboard")) # redirect to admin dashboard
+                # return redirect(url_for("admindashboard")) # redirect to admin dashboard
             else:
                 msg = 'Incorrect username/password!'
                 flask.flash(msg)
         else:
             msg = 'Incorrect username/password!'
             flask.flash(msg)
-    return render_template('login.html', msg = msg)
+    return render_template('login.html', msg=msg)
+
 
 # about us url
 
@@ -84,17 +89,18 @@ def logout():
     session.clear()
     return redirect(url_for('login'))
 
-@app.route('/register', methods =['GET', 'POST'])
+
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     msg = ''
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form and 'role' in request.form :
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form and 'role' in request.form:
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
         role = request.form['role']
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM users WHERE email = % s', (username, ))
-        account = cursor.fetchone() # fetches the first row
+        cursor.execute('SELECT * FROM users WHERE email = % s', (username,))
+        account = cursor.fetchone()  # fetches the first row
         if account:
             msg = 'Account already exists !'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
@@ -109,7 +115,8 @@ def register():
             msg = 'You have successfully registered!'
     elif request.method == 'POST':
         msg = 'Please fill out the form!'
-    return render_template('register.html', msg = msg)
+    return render_template('register.html', msg=msg)
+
 
 # third
 
@@ -117,10 +124,17 @@ def register():
 def about():
     return render_template('about_us.html')
 
+
+@app.route('/contact_us')
+def contact():
+    return render_template('contact_us.html')
+
+
 # fourth
 @app.route('/index')
 def index():
     return render_template('index.html')
+
 
 # fifth
 @app.route('/index', methods=['POST'])
@@ -129,6 +143,7 @@ def choose():
         return redirect(url_for('pick_table'))
     else:
         return render_template('index.html')
+
 
 # sixth
 
@@ -139,13 +154,28 @@ def pick_table():
         session.pop('table_name', None)
     options = nested_list_to_html_select(show_tables(mysql))
     if request.method == 'POST' and 'table' in request.form:
-    
+
         if 'pick' in request.form:
             session['table_name'] = request.form['table']
             return redirect(url_for('edit'))
 
+        elif 'rename' in request.form:
+
+            table = request.form['table']
+            new_name = request.form['new_name']
+
+            # Rename table
+            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute(f"ALTER TABLE {table} RENAME TO {new_name}")
+
+            mysql.connection.commit()
+
+            session['table_name'] = request.form['new_name']
+            return redirect(url_for('edit'))
+
     table = nested_list_to_html_table(show_tables(mysql))
     return render_template('pick_table.html', table=table, table_name=table_name, options=options)
+
 
 # seventh
 
@@ -158,7 +188,8 @@ def edit():
         operation = 'insert'
         table = nested_list_to_html_table(select_with_headers(mysql, table_name), buttons=True)
         form_html = get_insert_form(select_with_headers(mysql, table_name)[0])
-        return render_template('edit.html', table=table, table_name=table_name, operation=operation, form_html=form_html)
+        return render_template('edit.html', table=table, table_name=table_name, operation=operation,
+                               form_html=form_html)
     elif request.method == 'POST' and 'insert_execute' in request.form:
         columns = select_with_headers(mysql, table_name)[0]
         values = []
@@ -200,7 +231,8 @@ def edit():
             where.append(col + " = " + val)
         where = " AND ".join(where)
         session['update_where'] = where
-        return render_template('edit.html', table=table, table_name=table_name, operation=operation, form_html=form_html)
+        return render_template('edit.html', table=table, table_name=table_name, operation=operation,
+                               form_html=form_html)
     elif request.method == 'POST' and 'update_execute' in request.form:
         columns = select_with_headers(mysql, table_name)[0]
         values = []
@@ -210,7 +242,7 @@ def edit():
                 values.append(val)
             else:
                 values.append("\'" + val + "\'")
-        
+
         set_statement = []
         for col, val in zip(columns, values):
             set_statement.append(col + " = " + val)
@@ -225,11 +257,11 @@ def edit():
             session.pop('update_where', None)
         return render_template('update_results.html', tables=tables, table_name=table_name)
 
-
     table = nested_list_to_html_table(select_with_headers(mysql, table_name), buttons=True)
     return render_template('edit.html', table=table, table_name=table_name, operation=operation, form_html=form_html)
 
-# app run 
+
+# app run
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, port=5000)
