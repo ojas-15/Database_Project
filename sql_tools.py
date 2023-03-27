@@ -36,13 +36,13 @@ def convert(raw_out, type):
 
     return res
 
-def col_names(mysql, tablename, db_name="dispensary"):
+def col_names(mysql, tablename, db_name="dms"):
     '''
     Obtains the names of all columns of the table as a list
 
     mysql: mysql connection object
     tablename: name of the table whose columns we have to find
-    db_name: name of the database to be used ("dispensary")
+    db_name: name of the database to be used ("dms")
 
     Return
     res: Returns a list containing the names of all columns
@@ -65,12 +65,12 @@ def list_to_string(list):
     corr_str = "(" + corr_str + ")"
     return corr_str
 
-def use_database(mysql, db_name='dispensary'):
+def use_database(mysql, db_name='dms'):
     '''
     Selects database
 
     mysql: mysql connection object
-    db_name: name of the database to be used ("dispensary")
+    db_name: name of the database to be used ("dms")
     '''
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute("USE %s", db_name)
