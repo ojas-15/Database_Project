@@ -4,31 +4,6 @@ CREATE DATABASE DMS;
 USE DMS;
 
 
--- USER defined data-types
-
--- create type Weight_kg as (
-	-- numeric(5,2) final);
--- create type Hiight_cm as (
-	-- INT(3) final);
-    
--- CREATE TYPE Name AS (
-    -- first_name VARCHAR(50) NOT NULL,
-    -- middle_name VARCHAR(50),
-    -- last_name VARCHAR(50) NOT NULL);
-
--- CREATE TYPE Address AS (
-    -- street VARCHAR(50),
-    -- city VARCHAR(50),
-    -- district VARCHAR(50),
-    -- state VARCHAR(50),
-    -- Pincode VARCHAR(50));
-
--- ALTER TABLE Vendor_contacts ADD COLUMN location JSON;
-
--- UPDATE Vendor_contacts SET location = JSON_OBJECT(
---     'Country Code', contact_country_code
--- );
-
 -- Employee
 DROP TABLE IF EXISTS Employee;
 
@@ -499,97 +474,22 @@ INSERT INTO storing_images(caption, img) VALUE('thermometer','https://encrypted-
 INSERT INTO storing_images(caption, img) VALUE('morphine','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTIXaoe_wE941EyIZGfjFi2qUXqxIrphYMzw&usqp=CAU
 ');
 
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL
+);
+
+INSERT INTO users (name, email, password, role) VALUES
+    ('Rakesh Kumar', 'rakesh.kumar@gmail.com', '123456', 'patient'),
+    ('Sunita Gupta', 'sunita.gupta@gmail.com', '123456', 'patient'),
+    ('Anupama Singh', 'anupama.singh@gmail.com', '123456', 'doctor'),
+    ('Rohan Mehra', 'rohan.mehta@gmail.com', '123456', 'doctor'),
+    ('Yash Kokane', 'yash.kokane@gmail.com', '123456', 'admin'),
+	('Akshat', 'akshat.shrivastava@gmail.com', '123456', 'admin');
+
 -- COMMIT
 COMMIT;
-
-
--- selecting images
-SELECT * FROM storing_images;
-
--- creating view1
-drop view if exists view1;
-create view view1 as
-select first_name as 'First_Name',
-last_name as 'Last_Name',
-date as "Prescription_date",
-mp.item_name as "Prescribed_medicine", 
-m.form as "Medicine_type", 
-m.recommended_dosage, 
-e.name as 'Prescribed_by', 
-e.occupation as 'Role', 
-e.contact_number as "Staff_Contact_Number"
-from (((Prescription pr join Patient p using(patient_code)) 
-join Employee e using(staff_id)) 
-join Medical_products mp using(medical_id))
-join Medicine m using(medical_id);
-
--- make order details, include data about: Order id, order date, ordered items, vendor_name, vendor address, contact as vendor contact e.name (ordered by), staff role (Staff role), net_amount as Order Amount, pending_amount as amount pending
--- drop view if exists view2;
--- create view view2 as 
--- select order_id as "Order ID", order_date as "Order Date", mp.item_name as "Ordered Item", vendor_name as "Vendor", vc.contact as "Vendor Contact Number", e.name as "Ordered by", e.occupation as "Role", e.contact_number as "Staff Contact Number", net_total as "Order Amount", pending_amount as "Payment Pending"
--- from (((purchase_order join vendor v using (vendor_id) join employee e using (staff_id)) join medical_products mp using (medical_id)) join vendor_contacts vc using (vendor_id)); 
--- SET foreign_key_checks = 0;
-
-
--- creating view2
-drop view if exists view2;
-create view view2 as 
-select order_id as "Order_ID", 
-order_date as "Order_Date", 
-vendor_name as "Vendor", 
-net_total as "Order_Amount", 
-pending_amount as "Payment_Pending"
-from purchase_order join vendor v using(vendor_id);
-
--- Create a user named "user1" with the password "password1".
-DROP USER user1;
-CREATE USER user1 IDENTIFIED BY 'password1';
-
--- Grant "user1" SELECT, UPDATE, and DELETE permissions on "table1"
-GRANT SELECT, UPDATE, DELETE ON medical_inventory TO user1;
-
--- Select operation on table1
-SELECT * FROM medical_inventory; 
-
--- Update operation on table1
-UPDATE medical_inventory SET stocks = 200 WHERE medical_id = 10001; 
-
--- Delete operation on table1
-DELETE FROM medical_inventory WHERE stocks = 100;
-use dms  ;
-
-GRANT SELECT ON view1 TO user1;
-SELECT * FROM view1; 
-
--- Update operation on table1
-UPDATE view1 SET Medicine_type = 'Tablet' WHERE First_Name = 'Rachel' ; 
-
--- Delete operation on table1
--- DELETE FROM view1 WHERE First_Name = 'Olivia';
--- Delete FROM view2 WHERE Order_Amount = 4950;
-
--- DELETE FROM view1;
--- DELETE FROM view2 WHERE order_id = 1;
-
-
-SELECT * FROM medical_inventory; 
-
--- Update operation on table1
-UPDATE medical_inventory SET stocks = 400 WHERE medical_id = 10001; 
-
--- Delete operation on table1
-DELETE FROM medical_inventory WHERE stocks = 100;
-
-
--- Select operation on table1
-SELECT * FROM medical_inventory; 
-
--- Revoke the UPDATE and DELETE permissions on "table1" for "user1"
-REVOKE UPDATE, DELETE ON medical_inventory FROM user1;
-
-select * from medical_inventory;
-
-UPDATE medical_inventory SET stocks = 200 WHERE medical_id = 10004; 
-
-DELETE FROM medical_inventory WHERE stocks = 100;
-
