@@ -11,6 +11,7 @@ import re
 app = Flask(__name__)
 app.debug = True
 
+# secret key 
 app.secret_key = 'your_secret_key'
 
 # Enter your mysql connection details here
