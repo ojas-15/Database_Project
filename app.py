@@ -156,13 +156,14 @@ def pick_table():
     authority = session.get('authority')
     options = ''
     if authority == 'admin':
-        options = nested_list_to_html_select(show_tables(mysql)) 
+        options = nested_list_to_html_select(show_tables(mysql))
     elif authority == 'patient':
         options = ""
         tables = show_tables(mysql)
 
         for table in tables:
-            if table[0] in ["patient_view", "prescription_view", "medicine", "medical_staff_view", "appointment", "inventory_view"]:
+            if table[0] in ["patient_view", "prescription_view", "medicine", "medical_staff_view", "appointment",
+                            "inventory_view"]:
                 options += f"<option value='{table[0]}'>{table[0]}</option>"
 
     elif authority == 'doctor':
@@ -170,7 +171,8 @@ def pick_table():
         tables = show_tables(mysql)
 
         for table in tables:
-            if table[0] in ["patient_view", "medicine", "employee", "inventory_view","appointment", "prescription_view", "medical_staff_view"]:
+            if table[0] in ["patient_view", "medicine", "employee", "inventory_view", "appointment",
+                            "prescription_view", "medical_staff_view"]:
                 options += f"<option value='{table[0]}'>{table[0]}</option>"
     if request.method == 'POST' and 'table' in request.form:
 
@@ -192,9 +194,8 @@ def pick_table():
             session['table_name'] = request.form['new_name']
             return redirect(url_for('edit'))
 
-    table = nested_list_to_html_table(show_tables(mysql)) 
+    table = nested_list_to_html_table(show_tables(mysql))
     return render_template('pick_table.html', table=table, table_name=table_name, options=options)
-
 
 
 @app.route('/edit', methods=['POST', 'GET'])
@@ -202,7 +203,32 @@ def edit():
     table_name = session['table_name']
     operation = None
     form_html = ''
-    if request.method == 'POST' and 'insert_form' in request.form:
+    options = nested_list_to_html_select_2(col_names(mysql, table_name))
+
+    if request.method == 'POST' and 'search_form' in request.form:
+        operation = 'search'
+        table = nested_list_to_html_table(select_with_headers(mysql, table_name), buttons=True)
+        # form_html = get_insert_form(select_with_headers(mysql, table_name)[0])
+        return render_template('edit.html', table=table, table_name=table_name, operation=operation, options=options)
+
+    elif request.method == 'POST' and 'search_execute' in request.form:
+
+        # table = request.form['table']
+        search_col = request.form['column']
+        search_word = request.form['search_word']
+
+        # search table
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute(
+            f"DROP VIEW IF EXISTS Search_Result; CREATE VIEW Search_Result AS SELECT * FROM {table_name} WHERE {search_col} LIKE '%{search_word}%'")
+        table = cursor.fetchall()
+        cursor.nextset()
+        mysql.connection.commit()
+
+        session['table_name'] = 'Search_Result'
+        return redirect(url_for('edit'))
+
+    elif request.method == 'POST' and 'insert_form' in request.form:
         operation = 'insert'
         table = nested_list_to_html_table(select_with_headers(mysql, table_name), buttons=True)
         form_html = get_insert_form(select_with_headers(mysql, table_name)[0])

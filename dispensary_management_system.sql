@@ -413,7 +413,8 @@ INSERT INTO users (name, email, password, role) VALUES
     ('Sunita Gupta', 'sunita.gupta@gmail.com', '123456', 'patient'),
     ('Anupama Singh', 'anupama.singh@gmail.com', '123456', 'doctor'),
     ('Rohan Mehra', 'rohan.mehta@gmail.com', '123456', 'doctor'),
-    ('Yash Kokane', 'yash.kokane@gmail.com', '123456', 'admin');
+    ('Yash Kokane', 'yash.kokane@gmail.com', '123456', 'admin'),
+    ('Akshat Shrivastava', 'akshat.shrivastava@gmail.com', '123456', 'admin');
 
 -- DROP TABLE IF EXISTS users;
 -- CREATE TABLE users (
