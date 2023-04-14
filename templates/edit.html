@@ -87,12 +87,13 @@
                     </button>
 
                     <!--Search Bar-->
-
+                    {% if operation!='search' %}
                     <div class="form-control mt-2">
                         <div class="flex-row gap-2">
                             <button name="search_form" class="btn btn-primary">Filter</button>
                         </div>
                     </div>
+                    {% endif%}
 
                     {% if operation=='search' %}
                     <form class='card-body flex flex-col gap-4 bg-base-200 rounded-lg mx-4 shadow-xl'
@@ -100,7 +101,7 @@
                           method='post'>
                         <div class="form-control">
                             <label class="label">
-                                <span class="label-text">Search Bar</span>
+                                <span class="label-text"></span>
                             </label>
                             <select name="column" class="select select-bordered w-full max-w-xs" required>
                                 {{ options|safe }}
