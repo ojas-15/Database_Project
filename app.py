@@ -16,7 +16,7 @@ app.secret_key = 'your_secret_key'
 # Enter your mysql connection details here
 app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'yourpassword'
+app.config['MYSQL_PASSWORD'] = 'dbpassword'
 app.config['MYSQL_DB'] = 'DMS'
 
 # Intialize MySQL
@@ -123,7 +123,7 @@ def register():
 
 @app.route('/about_us')
 def about():
-    return render_template('about_us.ohtml')
+    return render_template('about_us.html')
 
 
 @app.route('/contact_us')
@@ -283,7 +283,7 @@ def edit():
 # app run
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=7000)
 
 # List of changes to be made to the program (by me)
 # 1. Change the basic database tables (Prescription -> add doctor id, )
