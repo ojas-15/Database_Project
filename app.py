@@ -151,6 +151,7 @@ def choose():
 @app.route('/pick_table', methods=['POST', 'GET'])
 def pick_table():
     table_name = ''
+    operation = ''
     if session.get('table_name'):
         session.pop('table_name', None)
     authority = session.get('authority')
@@ -180,7 +181,14 @@ def pick_table():
             session['table_name'] = request.form['table']
             return redirect(url_for('edit'))
 
+        elif 'back' in request.form:
+            render_template('pick_table.html')
+
         elif 'rename' in request.form:
+            operation = 'rename'
+            return render_template('pick_table.html', operation=operation, options=options)
+
+        elif 'rename_execute' in request.form:
 
             table = request.form['table']
             new_name = request.form['new_name']
@@ -193,6 +201,7 @@ def pick_table():
 
             session['table_name'] = request.form['new_name']
             return redirect(url_for('edit'))
+
 
     table = nested_list_to_html_table(show_tables(mysql))
     return render_template('pick_table.html', table=table, table_name=table_name, options=options)
