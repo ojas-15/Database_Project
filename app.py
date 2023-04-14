@@ -230,12 +230,13 @@ def edit():
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute(
             f"DROP VIEW IF EXISTS Search_Result; CREATE VIEW Search_Result AS SELECT * FROM {table_name} WHERE {search_col} LIKE '%{search_word}%'")
-        table = cursor.fetchall()
+        result_table = cursor.fetchall()
         cursor.nextset()
         mysql.connection.commit()
 
-        session['table_name'] = 'Search_Result'
-        return redirect(url_for('edit'))
+        table_name = 'Search_Result'
+        table = nested_list_to_html_table(select_with_headers(mysql, table_name), buttons=True)
+        return render_template('search_result.html', table=table, table_name=table_name)
 
     elif request.method == 'POST' and 'insert_form' in request.form:
         operation = 'insert'
