@@ -1,40 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
-<head style="height: 100%; width: 100%;">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Contact Us - Dispensary Database</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-</head>
-<body style="height: 100%; width: 100%; overflow-x: hidden; font-family: 'Merriweather', serif;">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
-        crossorigin="anonymous"></script>
-<!--  navbar-->
-<div class="navbar mb-2 fixed w-full z-50 top-0 border-b bg-base-100 text-base-content ">
+<html>
 
-    <div class="container">
-        <a class="navbar-brand" href="index">
-            <img src="static/logo1.jpeg.jpg" alt="Bootstrap" width="175" height="50">
-        </a>
-    </div>
-    <div class="hidden px-2 mx-2 navbar-center lg:flex">
-        <div class="flex items-stretch">
-            <ul class="menu menu-horizontal">
-                <li>
-                    <a href="index" class="ghost-btn rounded-lg">Home</a>
-                    <a href="pick_table" class="ghost-btn rounded-lg">Edit</a>
-                    <a href="/about_us" class="ghost-btn rounded-lg">About Us</a>
-                    <a href="contact_us" class="ghost-btn rounded-lg">Contact Us</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-</div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- bootstrap link  -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@2.12.0/dist/full.css" rel="stylesheet" type="text/css" />
+
+
+  <!-- font awesome   -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
+
+  <title>Dispensary Management System</title>
+
+  <style>
+    /* Styles for the page */
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Merriweather', serif;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ccc;
+    }
+
+    footer {
+      color: #fff;
+      padding: 20px 0;
+    }
+
+    .container-1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .left,
+    .center,
+    .right {
+      flex: 1;
+      text-align: center;
+    }
+
+    .left {
+      text-align: left;
+    }
+
+    .right {
+      text-align: right;
+    }
+
+    .right a {
+      color: #fff;
+      margin-left: 10px;
+    }
+
+    .right a:first-child {
+      margin-left: 0;
+    }
+
+    p,h1,
+    h2 {
+      line-height: 2;
+    }
+
+    .ghost-btn {
+      color: black;
+      background-color: transparent;
+      border-radius: 0.25rem;
+      padding: 0.5rem 1rem;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .ghost-btn:hover {
+      color: white;
+      background-color: #377cfb;
+      border-color: #377cfb;
+    }
+  </style>
+</head>
+
+<body style="background-image: url(static/bg2.jpg); height: 100%; width: 100%; overflow-x: hidden; font-family: 'Merriweather', serif;;">
+
+  <!-- navbar -->
+ {% include 'nav_bar.html' %}
+  <!-- navbar end  -->
 
 <div class="container my-5">
     <div class="row">
