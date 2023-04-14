@@ -39,7 +39,7 @@ CREATE TABLE Medical_staff (
   specialization VARCHAR(255) NOT NULL,
   license_issue_date DATE NOT NULL,
   home_contact VARCHAR(20) NOT NULL,
-  FOREIGN KEY (staff_id) REFERENCES Employee(staff_id)
+  FOREIGN KEY (staff_id) REFERENCES Employee(staff_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO Medical_staff (staff_id, role, qualification, specialization, license_issue_date, home_contact) VALUES
@@ -59,7 +59,7 @@ CREATE TABLE Management_staff (
   specialization VARCHAR(255) NOT NULL,
   license_issue_date DATE NOT NULL,
   home_contact VARCHAR(20) NOT NULL,
-  FOREIGN KEY (staff_id) REFERENCES Employee(staff_id)
+  FOREIGN KEY (staff_id) REFERENCES Employee(staff_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO Management_staff (staff_id, role, qualification, specialization, license_issue_date, home_contact) VALUES
@@ -96,43 +96,42 @@ INSERT INTO Insurance (insurance_code, insurance_status, insurance_provider, ins
 -- Patient details Insurance(FK)
 DROP TABLE IF EXISTS Patient;
 
+DROP TABLE IF EXISTS Patient;
+
 CREATE TABLE Patient (
-    patient_code INT PRIMARY KEY,
-    first_name VARCHAR(50) NOT NULL,
-    middle_name VARCHAR(50),
-    last_name VARCHAR(50) NOT NULL,
-    age INT,
-    birth_date DATE,
-    gender CHAR(1),
-    height INT,
-    weight INT,
-    -- contact_number VARCHAR(20),
-    email VARCHAR(50),
-    street VARCHAR(50),
-    city VARCHAR(50),
-    district VARCHAR(50),
-    state VARCHAR(50),
-    Pincode VARCHAR(50),
-    occupation VARCHAR(50),
-    medical_history VARCHAR(500),
-    remarks VARCHAR(500),
-    insurance_code INT,
-    FOREIGN KEY (insurance_code) REFERENCES Insurance (insurance_code)
+patient_code INT PRIMARY KEY,
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50) NOT NULL,
+age INT,
+birth_date DATE,
+gender CHAR(1),
+height INT,
+weight INT,
+email VARCHAR(50),
+street VARCHAR(50),
+city VARCHAR(50),
+district VARCHAR(50),
+state VARCHAR(50),
+Pincode VARCHAR(50),
+occupation VARCHAR(50),
+medical_history VARCHAR(500),
+remarks VARCHAR(500),
+insurance_code INT,
+FOREIGN KEY (insurance_code) REFERENCES Insurance (insurance_code) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-INSERT INTO Patient (patient_code, first_name, middle_name, last_name, age, birth_date, gender, height, weight, email, street, city, district, state, Pincode, occupation, medical_history, remarks, insurance_code)
+INSERT INTO Patient (patient_code, first_name, last_name, age, birth_date, gender, height, weight, email, street, city, district, state, Pincode, occupation, medical_history, remarks, insurance_code)
 VALUES
-(1, 'John', 'W', 'Doe', 35, '1987-05-12', 'M', 180, 80, 'john.doe@example.com', 'Main St.', 'New York', 'Manhattan', 'NY', 10001, 'Software Engineer', 'None', 'None', 1001),
-(2, 'Jane', '', 'Smith', 45, '1977-02-28', 'F', 165, 65, 'jane.smith@example.com', 'Broadway', 'New York', 'Manhattan', 'NY', 10002, 'Doctor', 'Allergies', 'None', 1005),
-(3, 'David', 'J', 'Brown', 25, '1997-10-05', 'M', 175, 75, 'david.brown@example.com', 'Main St.', 'Boston', 'Suffolk', 'MA', 02108, 'Student', 'None', 'None', 1007),
-(4, 'Samantha', '', 'Lee', 32, '1990-08-15', 'F', 160, 60, 'samantha.lee@example.com', 'King St.', 'Toronto', 'Toronto', 'ON', 'M5V 3L2', 'Designer', 'Asthma', 'None', 1002),
-(5, 'Michael', 'R', 'Wilson', 50, '1972-04-18', 'M', 185, 90, 'michael.wilson@example.com', 'Queen St.', 'Vancouver', 'Greater Vancouver', 'BC', 'V6B 6G9', 'Businessman', 'None', 'None', 1001),
-(6, 'Emily', '', 'Clark', 28, '1994-12-23', 'F', 170, 55, 'emily.clark@example.com', 'Washington St.', 'Los Angeles', 'Los Angeles', 'CA', 90001, 'Artist', 'Depression', 'None', 1006),
-(7, 'Robert', 'T', 'Miller', 42, '1980-09-08', 'M', 190, 100, 'robert.miller@example.com', 'Market St.', 'San Francisco', 'San Francisco', 'CA', 94103, 'Accountant', 'None', 'None', 1002),
-(8, 'Rachel', '', 'Green', 26, '1996-02-11', 'F', 163, 55, 'rachel.green@example.com', 'Broadway', 'New York', 'Manhattan', 'NY', 10003, 'Waitress', 'None', 'None', 1005),
-(9, 'Matthew', 'P', 'Davis', 31, '1991-11-28', 'M', 175, 80, 'matthew.davis@example.com', 'Main St.', 'Seattle', 'King', 'WA', 98101, 'Engineer', 'None', 'None', 1001),
-(10, 'Olivia', '', 'Moore', 29, '1993-07-09', 'F', 168, 60, 'olivia.moore@example.com', 'Oak St.', 'Portland', 'Multnomah', 'OR', 97204, 'Graphic Designer', 'None', 'None', 1002);
-
+(1, 'John', 'Doe', 35, '1987-05-12', 'M', 180, 80, 'john.doe@example.com', 'Main St.', 'New York', 'Manhattan', 'NY', 10001, 'Software Engineer', 'None', 'None', 1001),
+(2, 'Jane', 'Smith', 45, '1977-02-28', 'F', 165, 65, 'jane.smith@example.com', 'Broadway', 'New York', 'Manhattan', 'NY', 10002, 'Doctor', 'Allergies', 'None', 1005),
+(3, 'David', 'Brown', 25, '1997-10-05', 'M', 175, 75, 'david.brown@example.com', 'Main St.', 'Boston', 'Suffolk', 'MA', 02108, 'Student', 'None', 'None', 1007),
+(4, 'Samantha', 'Lee', 32, '1990-08-15', 'F', 160, 60, 'samantha.lee@example.com', 'King St.', 'Toronto', 'Toronto', 'ON', 'M5V 3L2', 'Designer', 'Asthma', 'None', 1002),
+(5, 'Michael', 'Wilson', 50, '1972-04-18', 'M', 185, 90, 'michael.wilson@example.com', 'Queen St.', 'Vancouver', 'Greater Vancouver', 'BC', 'V6B 6G9', 'Businessman', 'None', 'None', 1001),
+(6, 'Emily', 'Clark', 28, '1994-12-23', 'F', 170, 55, 'emily.clark@example.com', 'Washington St.', 'Los Angeles', 'Los Angeles', 'CA', 90001, 'Artist', 'Depression', 'None', 1006),
+(7, 'Robert', 'Miller', 42, '1980-09-08', 'M', 190, 100, 'robert.miller@example.com', 'Market St.', 'San Francisco', 'San Francisco', 'CA', 94103, 'Accountant', 'None', 'None', 1002),
+(8, 'Rachel', 'Green', 26, '1996-02-11', 'F', 163, 55, 'rachel.green@example.com', 'Broadway', 'New York', 'Manhattan', 'NY', 10003, 'Waitress', 'None', 'None', 1005),
+(9, 'Matthew', 'Davis', 31, '1991-11-28', 'M', 175, 80, 'matthew.davis@example.com', 'Main St.', 'Seattle', 'King', 'WA', 98101, 'Engineer', 'None', 'None', 1001),
+(10, 'Olivia', 'Moore', 29, '1993-07-09', 'F', 168, 60, 'olivia.moore@example.com', 'Oak St.', 'Portland', 'Multnomah', 'OR', 97204, 'Graphic Designer', 'None', 'None', 1002);
 
 -- Patient Contact
 DROP TABLE IF EXISTS Patient_contact_number;
@@ -140,7 +139,7 @@ DROP TABLE IF EXISTS Patient_contact_number;
 CREATE TABLE Patient_contact_number (
     patient_code INT,
     contact_number VARCHAR(20) NOT NULL,
-    FOREIGN KEY (patient_code) REFERENCES Patient(patient_code)
+    FOREIGN KEY (patient_code) REFERENCES Patient(patient_code) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO Patient_contact_number (patient_code, contact_number) VALUES
@@ -163,10 +162,7 @@ CREATE TABLE Medical_Products (
     medical_id INT PRIMARY KEY,
     cost INT,
     item_name VARCHAR(50) NOT NULL
-    -- staff_id INT,
-    -- vendor_id INT,
-    -- FOREIGN KEY (staff_id) REFERENCES Employee (staff_id)
-    -- FOREIGN KEY (vendor_id) REFERENCES Vendor(vendor_id)
+
 );
 
 INSERT INTO Medical_Products (medical_id, cost, item_name) VALUES
@@ -192,14 +188,14 @@ CREATE TABLE Medicine (
     manufacturing_date DATE NOT NULL,
     shelf_life VARCHAR(50),
     expiry_date DATE NOT NULL,
-    FOREIGN KEY (medical_id) REFERENCES Medical_Products(medical_id)
+    FOREIGN KEY (medical_id) REFERENCES Medical_Products(medical_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO Medicine (medical_id, form, active_ingredients, recommended_dosage, manufacturing_date, shelf_life, expiry_date) VALUES
-(10001, 'Tablet', 'Acetylsalicylic acid', '1-2 tablets every 4-6 hours', '2021-01-01', '3 years', '2024-01-01'),
-(10002, 'Capsule', 'Penicillin', '1 capsule every 8 hours', '2022-02-01', '2 years', '2024-02-01'),
-(10003, 'Injection', 'Morphine', '1 injection every 6 hours', '2021-07-01', '1 year', '2022-07-01'),
-(10004, 'Tablet', 'Serotonin-norepinephrine reuptake inhibitors', '1-2 tablets every day', '2022-01-01', '2 years', '2024-01-01');
+(10001, 'Tablet', 'Acetylsalicylic acid', '1-0-1', '2021-01-01', '3 years', '2024-01-01'),
+(10002, 'Capsule', 'Penicillin', '1-1-1', '2022-02-01', '2 years', '2024-02-01'),
+(10003, 'Injection', 'Morphine', '0-0-1', '2021-07-01', '1 year', '2022-07-01'),
+(10004, 'Tablet', 'Serotonin-norepinephrine reuptake inhibitors', '1-1-0', '2022-01-01', '2 years', '2024-01-01');
 
 -- Equipment
 DROP TABLE IF EXISTS Equipment;
@@ -227,7 +223,7 @@ CREATE TABLE Medical_inventory (
     medical_id INT PRIMARY KEY,
     stocks INT NOT NULL DEFAULT 0,
     availability VARCHAR(50) NOT NULL DEFAULT 'available',
-    FOREIGN KEY (medical_id) REFERENCES Medical_Products(medical_id)
+    FOREIGN KEY (medical_id) REFERENCES Medical_Products(medical_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO Medical_inventory (medical_id, stocks, availability) VALUES
@@ -250,26 +246,27 @@ CREATE TABLE Prescription (
     patient_code INT NOT NULL,
     staff_id INT NOT NULL,
     date DATE NOT NULL,
-    -- medicine VARCHAR(100),
     medical_id INT NOT NULL,
-    -- type_of_medicine VARCHAR(50),
-    FOREIGN KEY (medical_id) REFERENCES Medicine(medical_id),
-    FOREIGN KEY (patient_code) REFERENCES Patient(patient_code),
-    FOREIGN KEY (staff_id) REFERENCES Employee(staff_id)
+    complaint VARCHAR(100),
+    diagnosis VARCHAR(100),
+    FOREIGN KEY (medical_id) REFERENCES Medical_Products(medical_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (patient_code) REFERENCES Patient(patient_code) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (staff_id) REFERENCES Employee(staff_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-INSERT INTO Prescription (prescription_id, patient_code, staff_id, date, medical_id)
+INSERT INTO Prescription (prescription_id, patient_code, staff_id, date, medical_id, complaint, diagnosis)
 VALUES
-(1, 1, 1002, '2022-01-01', 10001),
-(2, 2, 1002, '2022-01-02', 10002),
-(3, 6, 1010, '2022-01-03', 10003),
-(4, 3, 1001, '2022-01-04', 10004),
-(5, 7, 1004, '2022-01-05', 10001),
-(6, 4, 1008, '2022-01-06', 10002),
-(7, 5, 1005, '2022-01-07', 10003),
-(8, 9, 1001, '2022-01-08', 10004),
-(9, 10, 1005, '2022-01-09', 10001),
-(10, 8, 1008, '2022-01-10', 10002);
+(1, 1, 1002, '2022-01-01', 10001, 'Headache', 'Migraine'),
+(2, 2, 1002, '2022-01-02', 10002, 'Fever', 'Influenza'),
+(3, 6, 1010, '2022-01-03', 10003, 'Stomachache', 'Gastritis'),
+(4, 3, 1001, '2022-01-04', 10004, 'Chest pain', 'Myocardial infarction'),
+(5, 7, 1004, '2022-01-05', 10001, 'Sore throat', 'Tonsillitis'),
+(6, 4, 1008, '2022-01-06', 10002, 'Back pain', 'Herniated disc'),
+(7, 5, 1005, '2022-01-07', 10003, 'Cough', 'Bronchitis'),
+(8, 9, 1001, '2022-01-08', 10004, 'Headache', 'Cluster headache'),
+(9, 10, 1005, '2022-01-09', 10001, 'Stomachache', 'Gastroenteritis'),
+(10, 8, 1008, '2022-01-10', 10002, 'Joint pain', 'Osteoarthritis');
+
 
 
 -- General Visit Prescription(FK)
@@ -284,7 +281,7 @@ CREATE TABLE General_visit (
     visit_number INT,
     reference VARCHAR(50),
     new_visit VARCHAR(10),
-    FOREIGN KEY (prescription_id) REFERENCES Prescription(prescription_id)
+    FOREIGN KEY (prescription_id) REFERENCES Prescription(prescription_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO General_visit (visit_id, prescription_id, visit_time, visit_date, visit_status, visit_number, reference, new_visit)
@@ -338,7 +335,7 @@ CREATE TABLE Vendor_contacts (
     contact VARCHAR(20) NOT NULL,
     -- user defined data_type
     contact_country_code VARCHAR(20),
-    FOREIGN KEY (vendor_id) REFERENCES Vendor(vendor_id)
+    FOREIGN KEY (vendor_id) REFERENCES Vendor(vendor_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO Vendor_contacts (vendor_id, contact)
@@ -418,62 +415,6 @@ INSERT INTO users (name, email, password, role) VALUES
     ('Rohan Mehra', 'rohan.mehta@gmail.com', '123456', 'doctor'),
     ('Yash Kokane', 'yash.kokane@gmail.com', '123456', 'admin');
 
--- table extension
-DROP TABLE IF EXISTS Pharma_Vendors;
--- CREATE TABLE Pharma_Vendors LIKE vendor;
-CREATE TABLE pharma_vendors as
-            (SELECT * 
-             FROM vendor
-             WHERE vendor.vendor_type = 'Pharmaceuticals');
-
-      
-CREATE TABLE equipment_vendors as
-            (SELECT * 
-             FROM vendor
-             WHERE (vendor.vendor_type = 'Equipment') or (vendor.vendor_type ='Supplies'));
-
-
-CREATE TABLE male_patients as
-            (SELECT * 
-             FROM patient
-             WHERE patient.gender = 'M');
-
-
-CREATE TABLE female_patients as
-            (SELECT * 
-             FROM patient
-             WHERE patient.gender = 'F');
-
-
-CREATE TABLE doctors as
-            (SELECT * 
-             FROM employee
-             WHERE employee.occupation = 'Doctor');
-             
-CREATE TABLE nurses as
-            (SELECT * 
-             FROM employee
-             WHERE employee.occupation = 'Nurse');
-
-CREATE TABLE storing_images (
-idpic INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-caption VARCHAR(45) NOT NULL,
-img LONGBLOB default null,
-PRIMARY KEY(idpic)
-);
-
-INSERT INTO storing_images(caption, img) VALUE('aspirin','https://e7.pngegg.com/pngimages/116/9/png-clipart-bayer-aspirin-box-box-of-aspirin-and-tablets-miscellaneous-aspirin-thumbnail.png');
-INSERT INTO storing_images(caption, img) VALUE('antibiotics','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqTzNOL5Hs6_uj0_G71cb4-A371XLY9yI4iQ&usqp=CAU');
-INSERT INTO storing_images(caption, img) VALUE('painkiller','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6mzHqr7NfJfvM5OAv_aq7_r3Is7mX58B4Q7d4d2U&s');
-INSERT INTO storing_images(caption, img) VALUE('antidepressants','https://novarecoverycenter.com/wp-content/uploads/2019/09/antidepressants-addiction.jpg');
-INSERT INTO storing_images(caption, img) VALUE('bandages','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3QIoWC0P20JsD8oPq6GSbmP__kgUJVg_lhA&usqp=CAU');
-INSERT INTO storing_images(caption, img) VALUE('ultrasound Machine','https://m9m2s9g3.rocketcdn.me/wp-content/uploads/2019/11/DC-90_portrait_full_3qtrL_001c_CDI_kidney_web_650x434-200x300.jpg');
-INSERT INTO storing_images(caption, img) VALUE('X-ray machine','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr4FNwlXj8hH0LHORhr0PVUljTbmzP4t00aQ&usqp=CAU');
-INSERT INTO storing_images(caption, img) VALUE('medical robot','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ5JRUDl4lJbfF4M0ErbOaBWls9xng86yhDw&usqp=CAU');
-INSERT INTO storing_images(caption, img) VALUE('thermometer','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-IymEOOGPBzb2td86MiAjyUTa9O26yKtvBA&usqp=CAU');
-INSERT INTO storing_images(caption, img) VALUE('morphine','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTIXaoe_wE941EyIZGfjFi2qUXqxIrphYMzw&usqp=CAU
-');
-
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -490,6 +431,39 @@ INSERT INTO users (name, email, password, role) VALUES
     ('Rohan Mehra', 'rohan.mehta@gmail.com', '123456', 'doctor'),
     ('Yash Kokane', 'yash.kokane@gmail.com', '123456', 'admin'),
 	('Akshat', 'akshat.shrivastava@gmail.com', '123456', 'admin');
+
+CREATE VIEW Prescription_View AS 
+SELECT 
+    Prescription.prescription_id, 
+    Prescription.patient_code, 
+	Employee.name AS Prescribed_by, 
+    Prescription.staff_id, 
+    Prescription.date, 
+    Prescription.complaint,
+    Prescription.diagnosis,
+    Medical_Products.item_name AS medical_product_name
+FROM Prescription 
+JOIN Medical_Products ON Prescription.medical_id = Medical_Products.medical_id 
+JOIN Employee ON Prescription.staff_id = Employee.staff_id;
+
+
+CREATE VIEW Inventory_view AS
+SELECT mp.medical_id, mp.item_name, mp.cost, mi.stocks, mi.availability
+FROM Medical_inventory mi
+JOIN Medical_Products mp ON mi.medical_id = mp.medical_id;
+
+CREATE VIEW Patient_view AS
+SELECT Patient.*, Patient_contact_number.contact_number
+FROM Patient
+LEFT JOIN Patient_contact_number
+ON Patient.patient_code = Patient_contact_number.patient_code;
+
+CREATE VIEW medical_staff_view AS
+SELECT ms.staff_id, e.name, ms.role, ms.qualification, ms.specialization, ms.license_issue_date, ms.home_contact, e.contact_number
+FROM Medical_staff ms
+LEFT JOIN Employee e ON ms.staff_id = e.staff_id;
+
+
 
 -- COMMIT
 COMMIT;

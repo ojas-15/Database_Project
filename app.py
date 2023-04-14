@@ -2,11 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 from sql_tools import *
 from html_tools import *
-
-import flask
-import yaml
 import MySQLdb.cursors
 import re
+
+import flask
 
 app = Flask(__name__)
 app.debug = True
@@ -17,7 +16,7 @@ app.secret_key = 'your_secret_key'
 # Enter your mysql connection details here
 app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'justanother_msd'
+app.config['MYSQL_PASSWORD'] = 'yourpassword'
 app.config['MYSQL_DB'] = 'DMS'
 
 # Intialize MySQL
@@ -34,6 +33,7 @@ def login():
         password = request.form['password']
         authority = request.form['authority']
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        session['authority'] = authority
         if (authority == "patient"):
             cursor.execute('SELECT * FROM users WHERE email = % s AND password = % s AND role=%s',
                            (useremail, password, "patient",))
@@ -123,7 +123,7 @@ def register():
 
 @app.route('/about_us')
 def about():
-    return render_template('about_us.html')
+    return render_template('about_us.ohtml')
 
 
 @app.route('/contact_us')
@@ -153,7 +153,25 @@ def pick_table():
     table_name = ''
     if session.get('table_name'):
         session.pop('table_name', None)
-    options = nested_list_to_html_select(show_tables(mysql))
+    authority = session.get('authority')
+    options = ''
+    if authority == 'admin':
+        options = nested_list_to_html_select(show_tables(mysql)) 
+    elif authority == 'patient':
+        options = ""
+        tables = show_tables(mysql)
+
+        for table in tables:
+            if table[0] in ["patient_view", "prescription_view", "medicine", "medical_staff_view", "appointment", "inventory_view"]:
+                options += f"<option value='{table[0]}'>{table[0]}</option>"
+
+    elif authority == 'doctor':
+        options = ""
+        tables = show_tables(mysql)
+
+        for table in tables:
+            if table[0] in ["patient_view", "medicine", "employee", "inventory_view","appointment", "prescription_view", "medical_staff_view"]:
+                options += f"<option value='{table[0]}'>{table[0]}</option>"
     if request.method == 'POST' and 'table' in request.form:
 
         if 'pick' in request.form:
@@ -174,11 +192,10 @@ def pick_table():
             session['table_name'] = request.form['new_name']
             return redirect(url_for('edit'))
 
-    table = nested_list_to_html_table(show_tables(mysql))
+    table = nested_list_to_html_table(show_tables(mysql)) 
     return render_template('pick_table.html', table=table, table_name=table_name, options=options)
 
 
-# seventh
 
 @app.route('/edit', methods=['POST', 'GET'])
 def edit():
@@ -214,12 +231,13 @@ def edit():
         for col, val in zip(columns, values):
             where.append(col + " = " + val)
         where = " AND ".join(where)
+        tables = delete_from_table(mysql, table_name, where)
         try:
-            tables = delete_from_table(mysql, table_name, where)
+            tables = [nested_list_to_html_table(t) for t in tables]
+            return render_template('delete_results.html', tables=tables, table_name=table_name)
         except Exception as e:
             return render_template('invalid.html', e=str(e))
-        tables = [nested_list_to_html_table(t) for t in tables]
-        return render_template('delete_results.html', tables=tables, table_name=table_name)
+
     elif request.method == 'POST' and 'update_button' in request.form:
         operation = 'update'
         table = nested_list_to_html_table(select_with_headers(mysql, table_name), buttons=True)
@@ -266,3 +284,12 @@ def edit():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
+# List of changes to be made to the program (by me)
+# 1. Change the basic database tables (Prescription -> add doctor id, )
+# Show inventory, product, medicine together. Include these tables: 
+# Purchase order directly references medicine id. 
+# 2. Remove foreign keys. This can be done by making joins.
+# 3. Change access. For that maybe make different login pages. 
+# 4. For patient, add a search button for all the prescriptions he has taken. (akshat)  In Medicine, add a search bar. 
+# 5. Undo Button (optional)
