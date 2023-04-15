@@ -16,7 +16,7 @@ app.secret_key = 'your_secret_key'
 # Enter your mysql connection details here
 app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'justanother_msd'
+app.config['MYSQL_PASSWORD'] = 'dbpassword'
 app.config['MYSQL_DB'] = 'DMS'
 
 # Intialize MySQL
@@ -233,10 +233,12 @@ def edit():
         result_table = cursor.fetchall()
         cursor.nextset()
         mysql.connection.commit()
-
-        table_name = 'Search_Result'
-        table = nested_list_to_html_table(select_with_headers(mysql, table_name), buttons=True)
-        return render_template('search_result.html', table=table, table_name=table_name)
+        try:
+            table_name = 'Search_Result'
+            table = nested_list_to_html_table(select_with_headers(mysql, table_name), buttons=True)
+            return render_template('search_result.html', table=table, table_name=table_name)
+        except Exception as e:
+            return render_template('invalid.html', e=str(e))
 
     elif request.method == 'POST' and 'insert_form' in request.form:
         operation = 'insert'
