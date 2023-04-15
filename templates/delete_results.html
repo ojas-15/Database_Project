@@ -32,40 +32,7 @@
 
 <body style="height: 100%; width: 100%; overflow-x: hidden; font-family: 'Merriweather', serif;">
   <!-- navbar -->
-  <div class="navbar mb-2 fixed w-full z-50  top-0 border-b bg-base-100 text-base-content ">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="static/logo1.jpeg.jpg" alt="Bootstrap" width="175" height="50">
-      </a>
-    </div>
-    <div class="hidden px-2 mx-2 navbar-center lg:flex">
-      <div class="flex items-stretch">
-        <ul class="menu menu-horizontal">
-          <li>
-            <a href="index" class="ghost-btn rounded-lg">Home</a>
-            <a href="pick_table" class="ghost-btn rounded-lg">Edit</a>
-            <a href="http://127.0.0.1:5000/templates/about_us.html" class="ghost-btn rounded-lg">About Us</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="navbar-end">
-      <div class="dropdown dropdown-end">
-        <div tabindex="0" class="m-1 btn btn-square btn-ghost lg:hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-            class="inline-block w-6 h-6 stroke-current">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </div>
-        <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
-          <li>
-            <a href="/">Home</a>
-            <a href="pick_table">Edit</a>
-          </li>
-        </ul>
-      </div>    
-    </div>
-  </div>
+  {% include 'nav_bar.html' %}
 
 
   

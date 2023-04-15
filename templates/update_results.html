@@ -35,24 +35,7 @@
 
 <body style="height: 100%; width: 100%; overflow-x: hidden; font-family: 'Merriweather', serif;">
   <!-- navbar -->
-  <div class="navbar mb-2 fixed w-full z-50 top-0 border-b bg-base-100 text-base-content ">
-    <div class="px-2 mx-2 navbar-start">
-      <span class="text-lg font-bold">
-        <a href="/">Dispensary Management System</a>
-      </span>
-    </div>
-    <div class="hidden px-2 mx-2 navbar-center lg:flex">
-      <div class="flex items-stretch">
-        <ul class="menu menu-horizontal">
-          <li>
-            <a href="/" class="ghost-btn rounded-lg">Home</a>
-            <a href="pick_table" class="ghost-btn rounded-lg">Edit</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-   
-  </div>
+  {% include 'nav_bar.html' %}
 
 
   <!-- hero -->

@@ -61,6 +61,10 @@ th {
 
 
 
+
+
+
+
     </style>
 
     <title>Dispensary Management System</title>
@@ -69,25 +73,7 @@ th {
 
 <body style="height: 100%; width: 100%; overflow-x: hidden; font-family: 'Merriweather', serif;">
 
-<div class="navbar mb-2 fixed w-full z-50 top-0 border-b bg-base-100 text-base-content ">
-
-    <div class="container">
-        <a class="navbar-brand" href="#">
-            <img src="static/logo1.jpeg.jpg" alt="Bootstrap" width="175" height="50">
-        </a>
-    </div>
-    <div class="hidden px-2 mx-2 navbar-center lg:flex">
-        <div class="flex items-stretch">
-            <ul class="menu menu-horizontal">
-                <li>
-                    <a href="/index" class="ghost-btn rounded-lg">Home</a>
-                    <a href="pick_table" class="ghost-btn rounded-lg">Edit</a>
-                    <a href="/about_us" class="ghost-btn rounded-lg">About Us</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+{% include 'nav_bar.html' %}
 
 
 <div class="min-h-screen bg-base-100 p-16 lg:p-32" style="background-image: url(static/bg2.jpg);">
@@ -95,35 +81,65 @@ th {
     <div class="hero-content flex-col lg:flex-row-reverse gap-16">
         <div class="card flex-shrink-0 w-full max-w-sm shadow-xl bg-base-100">
             <form class="card-body" enctype="multipart/form-data" method="post">
+
+                {% if operation == 'rename' %}
+                <div class="form-control mt-2">
+                    <div class="flex-row gap-2">
+                        <a href="pick_table" name="pick_table" class="btn btn-secondary mr-2 gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                  d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        Back
+                    </a>
+                    </div>
+                </div>
+                {% endif %}
+
                 <div class="form-control">
                     <select name="table" class="select select-bordered w-full max-w-xs" required>
                         {{ options|safe }}
                     </select>
                 </div>
 
+                {% if operation == 'rename' %}
+
                 <div class="form-control">
+                    <h1 class="font-bold text-xl p-2">{{ table_name }}</h1>
+
                     <label class="label">
                         <span class="label-text">New table name:</span>
                     </label>
-                    <input type="text" name="new_name" value="None" class="input input-bordered w-full max-w-xs" required>
+                    <input type="text" name="new_name" placeholder="None" class="input input-bordered w-full max-w-xs"
+                           required>
                 </div>
-
                 <div class="form-control mt-2">
                     <div class="flex-row gap-2">
-                        <button name="pick" class="btn btn-secondary mr-2">Choose</button>
-                        <button name="rename" class="btn btn-primary">Rename</button>
+                        <button name="rename_execute" class="btn btn-primary">Confirm</button>
                     </div>
                 </div>
-<!--                {% if rename %}-->
+                {% endif %}
+                {% if operation != 'rename' %}
+                <div class="form-control mt-2">
+                    <div class="flex-row gap-2">
 
-<!--                <div class="form-control">-->
-<!--                    <label class="label">-->
-<!--                        <span class="label-text">New table name:</span>-->
-<!--                    </label>-->
-<!--                    <input type="text" name="new_name" class="input input-bordered w-full max-w-xs" required>-->
-<!--                </div>-->
+                        <button name="pick" class="btn btn-secondary mr-2">Choose</button>
+                        <button name="rename" class="btn btn-primary">Rename</button>
 
-<!--                {% endif %}-->
+                    </div>
+                </div>
+                {% endif %}
+                <!--                {% if rename %}-->
+
+                <!--                <div class="form-control">-->
+                <!--                    <label class="label">-->
+                <!--                        <span class="label-text">New table name:</span>-->
+                <!--                    </label>-->
+                <!--                    <input type="text" name="new_name" class="input input-bordered w-full max-w-xs" required>-->
+                <!--                </div>-->
+
+                <!--                {% endif %}-->
             </form>
         </div>
     </div>

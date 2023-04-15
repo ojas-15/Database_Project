@@ -413,38 +413,43 @@ INSERT INTO users (name, email, password, role) VALUES
     ('Sunita Gupta', 'sunita.gupta@gmail.com', '123456', 'patient'),
     ('Anupama Singh', 'anupama.singh@gmail.com', '123456', 'doctor'),
     ('Rohan Mehra', 'rohan.mehta@gmail.com', '123456', 'doctor'),
-    ('Yash Kokane', 'yash.kokane@gmail.com', '123456', 'admin');
-
-DROP TABLE IF EXISTS users;
-CREATE TABLE users (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    role VARCHAR(255) NOT NULL
-);
-
-INSERT INTO users (name, email, password, role) VALUES
-    ('Rakesh Kumar', 'rakesh.kumar@gmail.com', '123456', 'patient'),
-    ('Sunita Gupta', 'sunita.gupta@gmail.com', '123456', 'patient'),
-    ('Anupama Singh', 'anupama.singh@gmail.com', '123456', 'doctor'),
-    ('Rohan Mehra', 'rohan.mehta@gmail.com', '123456', 'doctor'),
     ('Yash Kokane', 'yash.kokane@gmail.com', '123456', 'admin'),
-	('Akshat', 'akshat.shrivastava@gmail.com', '123456', 'admin');
+    ('Akshat Shrivastava', 'akshat.shrivastava@gmail.com', '123456', 'admin');
+
+-- DROP TABLE IF EXISTS users;
+-- CREATE TABLE users (
+--     id INT PRIMARY KEY AUTO_INCREMENT,
+--     name VARCHAR(255) NOT NULL,
+--     email VARCHAR(255) NOT NULL UNIQUE,
+--     password VARCHAR(255) NOT NULL,
+--     role VARCHAR(255) NOT NULL
+-- );
+
+-- INSERT INTO users (name, email, password, role) VALUES
+--     ('Rakesh Kumar', 'rakesh.kumar@gmail.com', '123456', 'patient'),
+--     ('Sunita Gupta', 'sunita.gupta@gmail.com', '123456', 'patient'),
+--     ('Anupama Singh', 'anupama.singh@gmail.com', '123456', 'doctor'),
+--     ('Rohan Mehra', 'rohan.mehta@gmail.com', '123456', 'doctor'),
+--     ('Yash Kokane', 'yash.kokane@gmail.com', '123456', 'admin'),
+-- 	('Akshat', 'akshat.shrivastava@gmail.com', '123456', 'admin');
 
 CREATE VIEW Prescription_View AS 
 SELECT 
     Prescription.prescription_id, 
-    Prescription.patient_code, 
-	Employee.name AS Prescribed_by, 
-    Prescription.staff_id, 
+    Patient.first_name as 'First_Name', 
+    Patient.last_name as 'Last_Name', 
+    Patient.gender as 'Sex',
+    Patient.age as 'Age',
+	Employee.name AS 'Prescribed_By',
+    Employee.occupation AS 'Employee_Role',
     Prescription.date, 
     Prescription.complaint,
     Prescription.diagnosis,
-    Medical_Products.item_name AS medical_product_name
+    Medical_Products.item_name AS 'Prescribed_Product'
 FROM Prescription 
-JOIN Medical_Products ON Prescription.medical_id = Medical_Products.medical_id 
-JOIN Employee ON Prescription.staff_id = Employee.staff_id;
+JOIN Medical_Products USING(medical_id)
+JOIN Employee USING(staff_id)
+JOIN Patient USING(patient_code);
 
 
 CREATE VIEW Inventory_view AS

@@ -16,7 +16,7 @@ app.secret_key = 'your_secret_key'
 # Enter your mysql connection details here
 app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'justanother_msd'
+app.config['MYSQL_PASSWORD'] = 'yourpassword'
 app.config['MYSQL_DB'] = 'DMS'
 
 # Intialize MySQL
@@ -123,7 +123,7 @@ def register():
 
 @app.route('/about_us')
 def about():
-    return render_template('about_us.ohtml')
+    return render_template('about_us.html')
 
 
 @app.route('/contact_us')
@@ -151,18 +151,20 @@ def choose():
 @app.route('/pick_table', methods=['POST', 'GET'])
 def pick_table():
     table_name = ''
+    operation = ''
     if session.get('table_name'):
         session.pop('table_name', None)
     authority = session.get('authority')
     options = ''
     if authority == 'admin':
-        options = nested_list_to_html_select(show_tables(mysql)) 
+        options = nested_list_to_html_select(show_tables(mysql))
     elif authority == 'patient':
         options = ""
         tables = show_tables(mysql)
 
         for table in tables:
-            if table[0] in ["patient_view", "prescription_view", "medicine", "medical_staff_view", "appointment", "inventory_view"]:
+            if table[0] in ["patient_view", "prescription_view", "medicine", "medical_staff_view", "appointment",
+                            "inventory_view"]:
                 options += f"<option value='{table[0]}'>{table[0]}</option>"
 
     elif authority == 'doctor':
@@ -170,7 +172,8 @@ def pick_table():
         tables = show_tables(mysql)
 
         for table in tables:
-            if table[0] in ["patient_view", "medicine", "employee", "inventory_view","appointment", "prescription_view", "medical_staff_view"]:
+            if table[0] in ["patient_view", "medicine", "employee", "inventory_view", "appointment",
+                            "prescription_view", "medical_staff_view"]:
                 options += f"<option value='{table[0]}'>{table[0]}</option>"
     if request.method == 'POST' and 'table' in request.form:
 
@@ -178,7 +181,14 @@ def pick_table():
             session['table_name'] = request.form['table']
             return redirect(url_for('edit'))
 
+        elif 'back' in request.form:
+            render_template('pick_table.html')
+
         elif 'rename' in request.form:
+            operation = 'rename'
+            return render_template('pick_table.html', operation=operation, options=options)
+
+        elif 'rename_execute' in request.form:
 
             table = request.form['table']
             new_name = request.form['new_name']
@@ -192,9 +202,9 @@ def pick_table():
             session['table_name'] = request.form['new_name']
             return redirect(url_for('edit'))
 
-    table = nested_list_to_html_table(show_tables(mysql)) 
-    return render_template('pick_table.html', table=table, table_name=table_name, options=options)
 
+    table = nested_list_to_html_table(show_tables(mysql))
+    return render_template('pick_table.html', table=table, table_name=table_name, options=options)
 
 
 @app.route('/edit', methods=['POST', 'GET'])
@@ -202,7 +212,33 @@ def edit():
     table_name = session['table_name']
     operation = None
     form_html = ''
-    if request.method == 'POST' and 'insert_form' in request.form:
+    options = nested_list_to_html_select_2(col_names(mysql, table_name))
+
+    if request.method == 'POST' and 'search_form' in request.form:
+        operation = 'search'
+        table = nested_list_to_html_table(select_with_headers(mysql, table_name), buttons=True)
+        # form_html = get_insert_form(select_with_headers(mysql, table_name)[0])
+        return render_template('edit.html', table=table, table_name=table_name, operation=operation, options=options)
+
+    elif request.method == 'POST' and 'search_execute' in request.form:
+
+        # table = request.form['table']
+        search_col = request.form['column']
+        search_word = request.form['search_word']
+
+        # search table
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute(
+            f"DROP VIEW IF EXISTS Search_Result; CREATE VIEW Search_Result AS SELECT * FROM {table_name} WHERE {search_col} LIKE '%{search_word}%'")
+        result_table = cursor.fetchall()
+        cursor.nextset()
+        mysql.connection.commit()
+
+        table_name = 'Search_Result'
+        table = nested_list_to_html_table(select_with_headers(mysql, table_name), buttons=True)
+        return render_template('search_result.html', table=table, table_name=table_name)
+
+    elif request.method == 'POST' and 'insert_form' in request.form:
         operation = 'insert'
         table = nested_list_to_html_table(select_with_headers(mysql, table_name), buttons=True)
         form_html = get_insert_form(select_with_headers(mysql, table_name)[0])
@@ -283,7 +319,7 @@ def edit():
 # app run
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=9999)
 
 # List of changes to be made to the program (by me)
 # 1. Change the basic database tables (Prescription -> add doctor id, )
