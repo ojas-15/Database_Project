@@ -16,7 +16,7 @@ app.secret_key = 'your_secret_key'
 # Enter your mysql connection details here
 app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'yourpassword'
+app.config['MYSQL_PASSWORD'] = 'justanother_msd'
 app.config['MYSQL_DB'] = 'DMS'
 
 # Intialize MySQL
