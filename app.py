@@ -319,7 +319,7 @@ def edit():
 # app run
 
 if __name__ == '__main__':
-    app.run(debug=True, port=7000)
+    app.run(debug=True, port=9999)
 
 # List of changes to be made to the program (by me)
 # 1. Change the basic database tables (Prescription -> add doctor id, )

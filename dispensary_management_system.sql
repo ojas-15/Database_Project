@@ -436,16 +436,16 @@ INSERT INTO users (name, email, password, role) VALUES
 CREATE VIEW Prescription_View AS 
 SELECT 
     Prescription.prescription_id, 
-    Patient.first_name as 'First Name', 
-    Patient.last_name as 'Last Name', 
+    Patient.first_name as 'First_Name', 
+    Patient.last_name as 'Last_Name', 
     Patient.gender as 'Sex',
     Patient.age as 'Age',
-	Employee.name AS 'Prescribed By',
-    Employee.occupation AS 'Employee Role',
+	Employee.name AS 'Prescribed_By',
+    Employee.occupation AS 'Employee_Role',
     Prescription.date, 
     Prescription.complaint,
     Prescription.diagnosis,
-    Medical_Products.item_name AS 'Prescribed Product'
+    Medical_Products.item_name AS 'Prescribed_Product'
 FROM Prescription 
 JOIN Medical_Products USING(medical_id)
 JOIN Employee USING(staff_id)
